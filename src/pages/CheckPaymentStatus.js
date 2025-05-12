@@ -1,4 +1,4 @@
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import { useState } from "react";
@@ -17,12 +17,14 @@ export default function CheckPaymentStatus() {
 
   const onSubmit = (data) => {
     axios
-      .get(`http://127.0.0.1:5000/api/payments/${data.transactionReference}`, {
-        headers: {
-          "X-API-Key":
-            "1WlgIV1W80rXmp2Txq3BcZsBFoR7NoshNnBXsw36HAQgam1mHsOfkATz4nQsg9al",
-        },
-      })
+      .get(
+        `${process.env.REACT_APP_SERVER_URL}/api/payments/${data.transactionReference}`,
+        {
+          headers: {
+            "X-API-Key": process.env.REACT_APP_API_KEY,
+          },
+        }
+      )
       .then(function (response) {
         // handle success
         console.log(response);
