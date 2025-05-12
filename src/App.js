@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+// import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./pages/Layout";
+import InitiatePayment from "./pages/InitiatePayment";
+import NoPage from "./pages/NoPage";
+import CheckPaymentStatus from "./pages/CheckPaymentStatus";
+import Reports from "./pages/Reports";
+// import 'dotenv/config'
 
-function App() {
+export default function App() {
+
+  // console.log("Environment Variables");
+  // console.log(process.env)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<InitiatePayment />} />
+          <Route path="payments/initate" element={<InitiatePayment />} />
+          <Route path="payments/check-status" element={<CheckPaymentStatus />} />
+          <Route path="payments/reports" element={<Reports />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
